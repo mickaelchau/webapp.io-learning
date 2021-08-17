@@ -1,0 +1,6 @@
+https://www.youtube.com/watch?v=j5Zsa_eOXeY&list=WL&index=24
+Nit
+Code coverage
+linter
+autoformatter
+ephemeral environment (!= instance for each branch)
