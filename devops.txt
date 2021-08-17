@@ -4,3 +4,70 @@ Code coverage
 linter
 autoformatter
 ephemeral environment (!= instance for each branch)
+
+
+---Linux---
+Linux is separating the ressources when you use != apps
+VM are useful to separate two program ressources
+(ex: program1 needs python2.7 and program 2 needs python3.6
+     VM are used to separate the both.
+)
+
+---Containers---
+Containers create "namespace (group shared ressources together)"
+in Linux.
+Inside the containers, you can only see the processes
+running within it.
+Outside, you see all processes runing in Linux
+Containers provide a "fake" version of Linux
+(ex: prgm 1 asks what are the contents of /usr/lib/python"
+And linux will answer "/var/lib/docker/overlayfs/1/usr/lib/python")
+
+---VM---
+VM provide a "fake" version of CPU, ram, disk
+
+---Rolling Deployments---
+When we want to push a new versions on databases:
+- create a new version of a database
+- shut down a database old version
+- repeat until all is in new versions
+
+Benefits:
+- well supported
+- no huge bursts
+- easily reverted
+
+Downsides:
+- Slow
+- API compatibility
+
+---Blue/Green Deployments---
+- We create instances of new versions and only connect
+  database to the new instances.
+- When we know that new version is working fine, we rotate users to new version 
+  instances
+- Shut off the old instances
+
+Benefits:
+- easy to understand
+- powerful
+- extendable to workflows
+
+Downsides:
+- difficult to make hotfixes (if pb occurs)
+- resources allocation not convinient
+- side effects between != versions
+
+---Rainbow Deployments---
+- Blue/Green Deployments with many other colors which reprensent
+  the remaining tasks. Each instance is closed when the current task ends.
+
+---Acceptance Test---
+- testing directly the new version in prod.
+  but only a small part of the users are using it.
+  those users have accepted to use it.
+
+---Canary Deployments---
+- blue/green deployment like but rotate only 5% of users to the new version.
+
+blue/green deployment is a problem when there are many updat a day.
